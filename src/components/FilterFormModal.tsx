@@ -1,5 +1,7 @@
 import IconCalendar from 'assets/ico_calendar.svg';
 import React, { useEffect, useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { uiState } from 'recoil/ui.recoil';
 
 import FormTitle from './FormTitle';
 import Tag from './Tag';
@@ -20,6 +22,7 @@ const COUNTRY_LIST_SECOND = [
 
 export default function FilterFormModal() {
   const datepickerRef = useRef<HTMLInputElement>(null);
+  const setUI = useSetRecoilState(uiState);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -43,6 +46,10 @@ export default function FilterFormModal() {
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedDate = e.target.value;
     console.log(selectedDate);
+  };
+
+  const onSubmit = () => {
+    setUI((prev) => ({ ...prev, showFilterFormModal: false }));
   };
 
   return (
@@ -89,7 +96,10 @@ export default function FilterFormModal() {
           </div>
         </div>
 
-        <div className="mt-[4rem] h-[6rem] rounded-[1.6rem] bg-[#3478F6] flex justify-center items-center text-white font-bold text-[1.6rem]">
+        <div
+          className="mt-[4rem] h-[6rem] rounded-[1.6rem] bg-[#3478F6] flex justify-center items-center text-white font-bold text-[1.6rem]"
+          onClick={onSubmit}
+        >
           필터 적용하기
         </div>
       </div>
