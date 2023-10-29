@@ -3,8 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 export default function Layout() {
   return (
-    <main>
-      <div>layout</div>
+    <main className="bg-[#F0F1F4]">
       <Outlet />
     </main>
   );

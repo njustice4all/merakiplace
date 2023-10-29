@@ -1,5 +1,21 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { getArticleAPI } from 'api/articleSearch.api';
+import Article from 'components/Article';
+import FilterHeader from 'components/FilterHeader';
+import { useState } from 'react';
 
 export default function HomeScreen() {
-  return <div>HomeScreen</div>;
+  const [page, setPage] = useState(0);
+
+  const { data } = useQuery({
+    queryKey: ['GET_ARTICLE_LIST', { page }],
+    queryFn: () => getArticleAPI({ page }),
+  });
+
+  return (
+    <>
+      <FilterHeader />
+      <div className="p-5">{data?.response.docs.map((doc) => <Article key={doc._id} />)}</div>
+    </>
+  );
 }

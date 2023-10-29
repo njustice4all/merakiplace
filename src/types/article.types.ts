@@ -78,5 +78,8 @@ export type Meta = {
 export type ArticleSearchResponse = {
   status: string;
   copyright: string;
-  response: [];
+  response: {
+    docs: Article[];
+    meta: Meta;
+  };
 };
