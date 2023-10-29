@@ -8,7 +8,12 @@
 
 html {
   font-size: 10px;
+
+  @media screen and (max-width: 374px) {
+    font-size: 8px;
+  }
 }
+
 
 body {
   max-width: 560px;

@@ -2,7 +2,7 @@ type Props = React.HTMLAttributes<HTMLDivElement>;
 
 export default function FormTitle({ children }: Props) {
   return (
-    <div className="text-[16px] font-bold leading-[24px] tracking-[-0.05em] mb-[8px]">
+    <div className="text-[1.6rem] font-bold leading-[2.4rem] tracking-[-0.05em] mb-[0.8rem]">
       {children}
     </div>
   );

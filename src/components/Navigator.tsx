@@ -27,7 +27,7 @@ export default function Navigator() {
   };
 
   return (
-    <div className="flex bg-black fixed bottom-0 max-w-[560px] w-full h-[85px] rounded-[30px] text-white">
+    <div className="flex bg-black fixed bottom-0 max-w-[560px] w-full h-[8.5rem] rounded-[3rem] text-white">
       {items.map((item) => (
         <NaviItem key={item.to} {...item} isActive={handleIsActive(item.to)} />
       ))}
@@ -49,7 +49,7 @@ function NaviItem({ to, label, icon, iconFill, isActive }: Props) {
       <Link to={to}>
         <img src={isActive ? iconFill : icon} />
         <div
-          className={`text-[10px] font-semibold text-center mt-[8px] text-[${
+          className={`text-[1rem] font-semibold text-center mt-[0.8rem] text-[${
             isActive ? '#fff' : '#6D6D6D'
           }]`}
         >

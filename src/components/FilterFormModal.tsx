@@ -46,26 +46,26 @@ export default function FilterFormModal() {
   };
 
   return (
-    <div className="px-[20px] fixed max-w-[560px] w-full h-full top-0 bg-[#00000050] flex justify-center items-center">
-      <div className="bg-white w-full rounded-[16px] p-[20px]">
+    <div className="px-[2rem] fixed max-w-[560px] w-full h-full top-0 bg-[#00000050] flex justify-center items-center">
+      <div className="bg-white w-full rounded-[1.6rem] p-[2rem]">
         <FormTitle>헤드라인</FormTitle>
         <input
           type="text"
           placeholder="검색하실 헤드라인을 입력해주세요."
-          className="mb-[40px] w-full h-[44px] border border-[#C4C4C4] rounded-[8px] px-[20px] py-[10px] text-[#C4C4C4] placeholder:text-[#C4C4C4]"
+          className="mb-[4rem] w-full h-[4.4rem] border border-[#C4C4C4] rounded-[0.8rem] px-[2rem] py-[1rem] text-[1.4rem] text-[#C4C4C4] placeholder:text-[#C4C4C4]"
         />
 
         <FormTitle>날짜</FormTitle>
-        <div className="text-[0px]">
+        <div className="text-[0rem]">
           <input
             type="date"
             id="datepicker"
             ref={datepickerRef}
-            className="w-[0px] h-[0px]"
+            className="w-[0rem] h-[0rem]"
             onChange={handleDateChange}
           />
           <div
-            className="flex justify-between items-center mb-[40px] w-full border border-[#C4C4C4] rounded-[8px] px-[20px] py-[10px]"
+            className="mb-[4rem] w-full h-[4.4rem] border border-[#C4C4C4] rounded-[0.8rem] px-[2rem] py-[1rem] flex justify-between items-center"
             onClick={onClickCalendar}
           >
             <div className="text-[#C4C4C4]">날짜를 선택해주세요.</div>
@@ -82,14 +82,14 @@ export default function FilterFormModal() {
               <Tag key={value} label={label} isActive={true} />
             ))}
           </div>
-          <div className="flex mt-[8px]">
+          <div className="flex mt-[0.8rem]">
             {COUNTRY_LIST_SECOND.map(({ label, value }) => (
               <Tag key={value} label={label} isActive={false} />
             ))}
           </div>
         </div>
 
-        <div className="mt-[40px] h-[60px] rounded-[16px] bg-[#3478F6] flex justify-center items-center text-white font-bold text-[16px]">
+        <div className="mt-[4rem] h-[6rem] rounded-[1.6rem] bg-[#3478F6] flex justify-center items-center text-white font-bold text-[1.6rem]">
           필터 적용하기
         </div>
       </div>
