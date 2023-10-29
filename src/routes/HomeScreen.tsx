@@ -15,7 +15,9 @@ export default function HomeScreen() {
   return (
     <>
       <FilterHeader />
-      <div className="p-5">{data?.response.docs.map((doc) => <Article key={doc._id} />)}</div>
+      <div className="p-5 pb-[85px]">
+        {data?.response.docs.map((doc) => <Article key={doc._id} />)}
+      </div>
     </>
   );
 }
