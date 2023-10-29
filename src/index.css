@@ -6,6 +6,7 @@
   font-family: Apple SD Gothic Neo;
 }
 
+
 html {
   font-size: 10px;
 
@@ -14,9 +15,13 @@ html {
   }
 }
 
-
 body {
   max-width: 560px;
   height: 100vh;
   margin: 0 auto;
 }
+
+#root, main {
+  height: 100%;
+}
+

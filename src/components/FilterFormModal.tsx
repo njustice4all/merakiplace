@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { uiState } from 'recoil/ui.recoil';
 
 import FormTitle from './FormTitle';
+import StyledButton from './StyledButton';
 import Tag from './Tag';
 
 const COUNTRY_LIST_FIRST = [
@@ -96,12 +97,7 @@ export default function FilterFormModal() {
           </div>
         </div>
 
-        <div
-          className="mt-[4rem] h-[6rem] rounded-[1.6rem] bg-[#3478F6] flex justify-center items-center text-white font-bold text-[1.6rem]"
-          onClick={onSubmit}
-        >
-          필터 적용하기
-        </div>
+        <StyledButton label="필터 적용하기" onSubmit={onSubmit} className="mt-[4rem]" />
       </div>
     </div>
   );

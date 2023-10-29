@@ -47,7 +47,9 @@ function NaviItem({ to, label, icon, iconFill, isActive }: Props) {
   return (
     <div className="flex-1 flex justify-center items-center">
       <Link to={to}>
-        <img src={isActive ? iconFill : icon} />
+        <div className="w-[2.4rem] aspect-square">
+          <img src={isActive ? iconFill : icon} />
+        </div>
         <div
           className={`text-[1rem] font-semibold text-center mt-[0.8rem] text-[${
             isActive ? '#fff' : '#6D6D6D'
