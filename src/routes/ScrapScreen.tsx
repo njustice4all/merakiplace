@@ -5,7 +5,9 @@ export default function ScrapScreen() {
   return (
     <>
       {/* <FilterHeader /> */}
-      <EmptyScrapDescription />
+      <div className="bg-[#F0F1F4] h-full">
+        <EmptyScrapDescription />
+      </div>
     </>
   );
 }

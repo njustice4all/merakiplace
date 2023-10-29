@@ -10,7 +10,7 @@ export default function Layout() {
   const { showFilterFormModal } = useRecoilValue(uiState);
 
   return (
-    <main className="bg-[#F0F1F4]">
+    <main>
       <Outlet />
       <Navigator />
       {showFilterFormModal && <FilterFormModal />}
