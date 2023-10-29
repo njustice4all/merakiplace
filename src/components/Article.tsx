@@ -1,5 +1,6 @@
 import IconStar from 'assets/star.svg';
 import IconStarFill from 'assets/star_fill.svg';
+import { convertDateFormat } from 'libs';
 import { Article as ArticleType } from 'types/article.types';
 
 type Props = ArticleType;
@@ -20,7 +21,7 @@ export default function Article(props: Props) {
           <span>{props.source}</span>
           <span className="ml-[0.8rem]">{props.byline.original}</span>
         </div>
-        <div>2023.12.12. (목)</div>
+        <div>{convertDateFormat(props.pub_date)}</div>
       </div>
     </div>
   );

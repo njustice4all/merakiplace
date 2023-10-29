@@ -8,7 +8,9 @@ export async function getArticleAPI(payload: any) {
   console.log(payload);
 
   return Http.instance
-    .get<ArticleSearchResponse>(`/articlesearch.json?page=${payload.page}&api-key=${API_KEY}`)
+    .get<ArticleSearchResponse>(
+      `/articlesearch.json?page=${payload.page}&sort=newest&api-key=${API_KEY}`
+    )
     .then(successResponse)
     .catch(errorResponse('getArticleAPI'));
 }
