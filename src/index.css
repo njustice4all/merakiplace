@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: Apple SD Gothic Neo;
+}
+
 body {
   max-width: 560px;
   height: 100vh;

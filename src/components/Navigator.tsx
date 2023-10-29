@@ -38,8 +38,8 @@ export default function Navigator() {
 type Props = {
   to: string;
   label: string;
-  icon: any;
-  iconFill: any;
+  icon: string;
+  iconFill: string;
   isActive?: boolean;
 };
 

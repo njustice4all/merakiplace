@@ -3,7 +3,7 @@ import IconStarFill from 'assets/star_fill.svg';
 
 export default function Article() {
   return (
-    <div className="bg-white px-[20px] py-[10px] rounded-[8px] mb-[8px]">
+    <div className="bg-white px-[20px] py-[10px] rounded-[8px] mb-[8px] tracking-[-0.05em]">
       <div className="flex">
         <div className="flex-1 text-[18px] font-bold leading-[28px] line-clamp-2">
           국방부 “北, 화성-17 실패 만회하려 영상 짜깁기… 성공 조작”
