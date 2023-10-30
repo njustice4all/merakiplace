@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
-import { filterState } from 'recoil/searchFilter.recoil';
 
 import FormTitle from './FormTitle';
+import { filterState } from 'recoil/searchFilter.recoil';
 
 type Props = {
   screen: 'home' | 'scrap';

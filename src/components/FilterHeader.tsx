@@ -1,12 +1,12 @@
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import FilterHeaderTag from './FilterHeaderTag';
 import IconCalendar from 'assets/ico_calendar.svg';
 import IconCalendarFill from 'assets/ico_calendar_fill.svg';
 import IconSearch from 'assets/ico_search.svg';
 import IconSearchFill from 'assets/ico_search_fill.svg';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getDisplayHeaderTag } from 'recoil/searchFilter.recoil';
 import { uiState } from 'recoil/ui.recoil';
-
-import FilterHeaderTag from './FilterHeaderTag';
 
 type Props = {
   screen: 'home' | 'scrap';

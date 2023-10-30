@@ -1,7 +1,6 @@
-import { COUNTRY_LIST_FIRST, COUNTRY_LIST_SECOND } from 'libs/constants';
-
 import FormTitle from './FormTitle';
 import Tag from './Tag';
+import { COUNTRY_LIST_FIRST, COUNTRY_LIST_SECOND } from 'libs/constants';
 
 type Props = {
   screen: 'home' | 'scrap';

@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
+
 import IconStar from 'assets/star.svg';
 import IconStarFill from 'assets/star_fill.svg';
 import { convertDateFormat } from 'libs';
-import { Link } from 'react-router-dom';
 import { Article as ArticleType } from 'types/article.types';
 
 type Props = ArticleType;

@@ -1,12 +1,13 @@
 import { QueryClient, useInfiniteQuery } from '@tanstack/react-query';
-import { getArticleAPI } from 'api/articleSearch.api';
-import Article from 'components/Article';
-import FilterFormModal from 'components/FilterFormModal';
-import FilterHeader from 'components/FilterHeader';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useLoaderData } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+
+import { getArticleAPI } from 'api/articleSearch.api';
+import Article from 'components/Article';
+import FilterFormModal from 'components/FilterFormModal';
+import FilterHeader from 'components/FilterHeader';
 import { getPayloadByScreen } from 'recoil/searchFilter.recoil';
 import { uiState } from 'recoil/ui.recoil';
 import { ArticleSearchResponse } from 'types/article.types';

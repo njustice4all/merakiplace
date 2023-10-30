@@ -1,13 +1,13 @@
 import { InfiniteData, QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { uiState } from 'recoil/ui.recoil';
-import { ArticleSearchResponse } from 'types/article.types';
 
 import FormCountries from './FormCountries';
 import FormDate from './FormDate';
 import FormHeadline from './FormHeadline';
 import StyledButton from './StyledButton';
+import { uiState } from 'recoil/ui.recoil';
+import { ArticleSearchResponse } from 'types/article.types';
 
 type Props = {
   screen: 'home' | 'scrap';

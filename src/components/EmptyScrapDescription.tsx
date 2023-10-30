@@ -1,7 +1,7 @@
-import IconEmpty from 'assets/ico_empty.svg';
 import { useNavigate } from 'react-router-dom';
 
 import StyledButton from './StyledButton';
+import IconEmpty from 'assets/ico_empty.svg';
 
 export default function EmptyScrapDescription() {
   const navigate = useNavigate();

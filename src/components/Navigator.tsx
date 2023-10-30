@@ -1,8 +1,9 @@
+import { Link, useLocation } from 'react-router-dom';
+
 import IconHome from 'assets/ico_home.svg';
 import IconHomeFill from 'assets/ico_home_fill.svg';
 import IconScrap from 'assets/ico_scrap.svg';
 import IconScrapFill from 'assets/ico_scrap_fill.svg';
-import { Link, useLocation } from 'react-router-dom';
 
 const items = [
   {

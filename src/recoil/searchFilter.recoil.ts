@@ -1,6 +1,7 @@
+import { atom, selectorFamily } from 'recoil';
+
 import { createQueryString } from 'libs';
 import { COUNTRY_LIST_FIRST, COUNTRY_LIST_SECOND } from 'libs/constants';
-import { atom, selectorFamily } from 'recoil';
 
 export type Filter = {
   q: string;

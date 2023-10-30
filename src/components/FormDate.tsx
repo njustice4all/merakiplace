@@ -1,9 +1,9 @@
-import IconCalendar from 'assets/ico_calendar.svg';
 import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
-import { filterState } from 'recoil/searchFilter.recoil';
 
 import FormTitle from './FormTitle';
+import IconCalendar from 'assets/ico_calendar.svg';
+import { filterState } from 'recoil/searchFilter.recoil';
 
 type Props = {
   screen: 'home' | 'scrap';
