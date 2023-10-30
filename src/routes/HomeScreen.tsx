@@ -17,7 +17,7 @@ export const getArticleListLoader = (queryClient: QueryClient) => () => {
 };
 
 const getArticleQuery = (queryString: string) => ({
-  queryKey: ['GET_ARTICLE_LIST', { queryString }],
+  queryKey: ['GET_ARTICLE_LIST'],
   queryFn: async ({ pageParam = 0 }) => getArticleAPI({ page: pageParam, queryString }),
   initialPageParam: 0,
   getNextPageParam: (lastPage: ArticleSearchResponse) => {
