@@ -39,24 +39,24 @@ export default function HomeScreen() {
     enabled: false,
   });
 
-  // useEffect(() => {
-  //   if (inView) {
-  //     fetchNextPage();
-  //   }
-  // }, [inView, fetchNextPage]);
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage]);
 
   return (
     <>
       {showFilterFormModal && <FilterFormModal screen="home" refetch={refetch} />}
-      <FilterHeader />
+      <FilterHeader screen="home" />
       <div className="p-5 pb-[8.5rem] bg-[#F0F1F4]">
-        {/* {data.pages.map((page, idx) => (
+        {data.pages.map((page, idx) => (
           <React.Fragment key={idx}>
             {page.response.docs.map((doc) => (
               <Article key={doc._id} {...doc} />
             ))}
           </React.Fragment>
-        ))} */}
+        ))}
         <div ref={ref} />
       </div>
     </>

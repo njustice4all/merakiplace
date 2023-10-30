@@ -16,7 +16,8 @@ function getCountryQuery(countryString: string) {
 export function createQueryString(filter: Filter) {
   let queryString = '';
   if (filter.date !== '') {
-    queryString += `&begin_date=${filter.date}&end_date=${filter.date}`;
+    const date = filter.date.replaceAll('.', '');
+    queryString += `&begin_date=${date}&end_date=${date}`;
   }
   if (filter.q !== '' && filter.countries !== '') {
     queryString += `&fq=headline:("${filter.q}") AND ${getCountryQuery(filter.countries)}`;

@@ -1,5 +1,5 @@
 import IconCalendar from 'assets/ico_calendar.svg';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { filterState } from 'recoil/searchFilter.recoil';
 
@@ -12,7 +12,6 @@ type Props = {
 export default function FormDate({ screen }: Props) {
   const datepickerRef = useRef<HTMLInputElement>(null);
   const [filter, setFilter] = useRecoilState(filterState);
-  const [displayDate, setDisplayDate] = useState('');
 
   const onClickCalendar = () => {
     if (datepickerRef.current) {
@@ -30,10 +29,11 @@ export default function FormDate({ screen }: Props) {
     const selectedDate = e.target.value;
     setFilter((prev) => ({
       ...prev,
-      [screen]: { ...prev[screen], date: selectedDate.replaceAll('-', '') },
+      [screen]: { ...prev[screen], date: selectedDate.replaceAll('-', '.') },
     }));
-    setDisplayDate(selectedDate.replaceAll('-', '.'));
   };
+
+  const displayDate = filter[screen].date;
 
   return (
     <>

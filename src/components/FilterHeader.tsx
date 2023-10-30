@@ -2,11 +2,19 @@ import IconCalendar from 'assets/ico_calendar.svg';
 import IconCalendarFill from 'assets/ico_calendar_fill.svg';
 import IconSearch from 'assets/ico_search.svg';
 import IconSearchFill from 'assets/ico_search_fill.svg';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { getDisplayHeaderTag } from 'recoil/searchFilter.recoil';
 import { uiState } from 'recoil/ui.recoil';
 
-export default function FilterHeader() {
+import FilterHeaderTag from './FilterHeaderTag';
+
+type Props = {
+  screen: 'home' | 'scrap';
+};
+
+export default function FilterHeader({ screen }: Props) {
   const setUI = useSetRecoilState(uiState);
+  const displayTag = useRecoilValue(getDisplayHeaderTag(screen));
 
   const onClickFilter = () => {
     setUI((prev) => ({ ...prev, showFilterFormModal: true }));
@@ -17,40 +25,33 @@ export default function FilterHeader() {
       className="h-[6rem] px-[2rem] py-[1.3rem] bg-white flex border-b border-b-[#C4C4C4] tracking-[-0.04em]"
       onClick={onClickFilter}
     >
-      <ItemWrapper className="w-[11.7rem] px-[1.2rem]">
-        <IconWrapper>
-          <img src={IconSearch} />
-        </IconWrapper>
-        <span className="w-full whitespace-nowrap overflow-hidden text-ellipsis">
-          전체 헤드라인
-        </span>
-      </ItemWrapper>
+      <FilterHeaderTag
+        className="max-w-[11.7rem] px-[1.2rem]"
+        isActive={displayTag.headline.isActive}
+      >
+        <img
+          src={displayTag.headline.isActive ? IconSearchFill : IconSearch}
+          className="mr-[0.4rem]"
+        />
+        <div className="w-full whitespace-nowrap overflow-hidden text-ellipsis">
+          {displayTag.headline.str}
+        </div>
+      </FilterHeaderTag>
 
-      <ItemWrapper className="w-[9.4rem]">
-        <IconWrapper>
-          <img src={IconCalendar} />
-        </IconWrapper>
-        <span>전체 날짜</span>
-      </ItemWrapper>
+      <FilterHeaderTag className="w-[9.4rem]" isActive={displayTag.date.isActive}>
+        <img
+          src={displayTag.date.isActive ? IconCalendarFill : IconCalendar}
+          className="mr-[0.4rem]"
+        />
+        <div>{displayTag.date.str}</div>
+      </FilterHeaderTag>
 
-      <ItemWrapper className="max-w-[10.8rem] px-[1.2rem]">
-        <span>전체 국가</span>
-      </ItemWrapper>
+      <FilterHeaderTag
+        className="px-[1.2rem] max-w-[10.4rem]"
+        isActive={displayTag.countries.isActive}
+      >
+        <div>{displayTag.countries.str}</div>
+      </FilterHeaderTag>
     </div>
   );
-}
-
-type Props = React.HTMLAttributes<HTMLDivElement>;
-
-function ItemWrapper({ children, className }: Props) {
-  const mergedClassNames = [
-    'h-full border border-[#C4C4C4] rounded-[3rem] mr-[0.7rem] flex items-center justify-center text-[1.4rem] text-[#6D6D6D]',
-    className,
-  ].join(' ');
-
-  return <div className={mergedClassNames}>{children}</div>;
-}
-
-function IconWrapper({ children }: Props) {
-  return <span className="w-[1.6rem] aspect-square mr-[0.2rem]">{children}</span>;
 }
