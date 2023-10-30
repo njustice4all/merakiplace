@@ -83,3 +83,8 @@ export type ArticleSearchResponse = {
     meta: Meta;
   };
 };
+
+export type ArticleSearchRequest = {
+  page: number;
+  queryString?: string;
+};

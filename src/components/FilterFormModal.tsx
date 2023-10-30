@@ -1,6 +1,7 @@
 import IconCalendar from 'assets/ico_calendar.svg';
 import React, { useEffect, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { filterState } from 'recoil/searchFilter.recoil';
 import { uiState } from 'recoil/ui.recoil';
 
 import FormTitle from './FormTitle';
@@ -24,6 +25,7 @@ const COUNTRY_LIST_SECOND = [
 export default function FilterFormModal() {
   const datepickerRef = useRef<HTMLInputElement>(null);
   const setUI = useSetRecoilState(uiState);
+  const setFilter = useSetRecoilState(filterState);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -50,6 +52,14 @@ export default function FilterFormModal() {
   };
 
   const onSubmit = () => {
+    setFilter((prev) => ({
+      ...prev,
+      home: {
+        q: 'tesla',
+        countries: 'United States',
+        date: '20231018',
+      },
+    }));
     setUI((prev) => ({ ...prev, showFilterFormModal: false }));
   };
 

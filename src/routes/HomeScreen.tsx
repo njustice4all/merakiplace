@@ -5,27 +5,34 @@ import FilterHeader from 'components/FilterHeader';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useLoaderData } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { getPayloadByScreen } from 'recoil/searchFilter.recoil';
 import { ArticleSearchResponse } from 'types/article.types';
 
 export const getArticleListLoader = (queryClient: QueryClient) => () => {
-  return queryClient.fetchInfiniteQuery({ ...getArticleQuery(), staleTime: Infinity });
+  return queryClient.fetchInfiniteQuery({ ...getArticleQuery(''), staleTime: Infinity });
 };
 
-const getArticleQuery = () => ({
-  queryKey: ['GET_ARTICLE_LIST'],
-  queryFn: async ({ pageParam = 0 }) => getArticleAPI({ page: pageParam }),
+const getArticleQuery = (queryString: string) => ({
+  queryKey: ['GET_ARTICLE_LIST', { queryString }],
+  queryFn: async ({ pageParam = 0 }) => getArticleAPI({ page: pageParam, queryString }),
   initialPageParam: 0,
   getNextPageParam: (lastPage: ArticleSearchResponse) => {
+    if (lastPage.response.docs.length === 0) return null;
     return lastPage.response.meta.offset / 10 + 1 ?? null;
   },
 });
 
 export default function HomeScreen() {
   const { ref, inView } = useInView();
+  const queryString = useRecoilValue(getPayloadByScreen('Home'));
   const initialData = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof getArticleListLoader>>
   >;
-  const { data, fetchNextPage } = useInfiniteQuery({ ...getArticleQuery(), initialData });
+  const { data, fetchNextPage } = useInfiniteQuery({
+    ...getArticleQuery(queryString),
+    initialData,
+  });
 
   useEffect(() => {
     if (inView) {
