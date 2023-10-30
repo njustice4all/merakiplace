@@ -1,12 +1,14 @@
 import { QueryClient, useInfiniteQuery } from '@tanstack/react-query';
 import { getArticleAPI } from 'api/articleSearch.api';
 import Article from 'components/Article';
+import FilterFormModal from 'components/FilterFormModal';
 import FilterHeader from 'components/FilterHeader';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useLoaderData } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { getPayloadByScreen } from 'recoil/searchFilter.recoil';
+import { uiState } from 'recoil/ui.recoil';
 import { ArticleSearchResponse } from 'types/article.types';
 
 export const getArticleListLoader = (queryClient: QueryClient) => () => {
@@ -26,31 +28,33 @@ const getArticleQuery = (queryString: string) => ({
 export default function HomeScreen() {
   const { ref, inView } = useInView();
   const queryString = useRecoilValue(getPayloadByScreen('Home'));
-  const initialData = useLoaderData() as Awaited<
-    ReturnType<ReturnType<typeof getArticleListLoader>>
-  >;
-  const { data, fetchNextPage } = useInfiniteQuery({
-    ...getArticleQuery(queryString),
-    initialData,
-  });
+  const { showFilterFormModal } = useRecoilValue(uiState);
+  // const initialData = useLoaderData() as Awaited<
+  //   ReturnType<ReturnType<typeof getArticleListLoader>>
+  // >;
+  // const { data, fetchNextPage } = useInfiniteQuery({
+  //   ...getArticleQuery(queryString),
+  //   initialData,
+  // });
 
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [inView, fetchNextPage]);
+  // useEffect(() => {
+  //   if (inView) {
+  //     fetchNextPage();
+  //   }
+  // }, [inView, fetchNextPage]);
 
   return (
     <>
+      {showFilterFormModal && <FilterFormModal screen="home" />}
       <FilterHeader />
       <div className="p-5 pb-[8.5rem] bg-[#F0F1F4]">
-        {data.pages.map((page, idx) => (
+        {/* {data.pages.map((page, idx) => (
           <React.Fragment key={idx}>
             {page.response.docs.map((doc) => (
               <Article key={doc._id} {...doc} />
             ))}
           </React.Fragment>
-        ))}
+        ))} */}
         <div ref={ref} />
       </div>
     </>

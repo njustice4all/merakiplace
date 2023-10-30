@@ -22,7 +22,7 @@ export const rootRouter = createBrowserRouter([
       {
         path: '/',
         element: <HomeScreen />,
-        loader: getArticleListLoader(queryClient),
+        // loader: getArticleListLoader(queryClient),
       },
       {
         path: '/scrap',

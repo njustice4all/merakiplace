@@ -1,6 +1,6 @@
 import IconCalendar from 'assets/ico_calendar.svg';
 import React, { useEffect, useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { filterState } from 'recoil/searchFilter.recoil';
 import { uiState } from 'recoil/ui.recoil';
 
@@ -22,10 +22,15 @@ const COUNTRY_LIST_SECOND = [
   { label: '영국', value: 'Britain' },
 ];
 
-export default function FilterFormModal() {
+type Props = {
+  screen: 'home' | 'scrap';
+};
+
+export default function FilterFormModal({ screen }: Props) {
   const datepickerRef = useRef<HTMLInputElement>(null);
   const setUI = useSetRecoilState(uiState);
-  const setFilter = useSetRecoilState(filterState);
+  const [{ home, scrap }, setFilter] = useRecoilState(filterState);
+  console.log(home.countries);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -48,7 +53,7 @@ export default function FilterFormModal() {
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedDate = e.target.value;
-    console.log(selectedDate);
+    console.log(selectedDate.replaceAll('-', ''));
   };
 
   const onSubmit = () => {
@@ -97,12 +102,12 @@ export default function FilterFormModal() {
         <div>
           <div className="flex">
             {COUNTRY_LIST_FIRST.map(({ label, value }) => (
-              <Tag key={value} label={label} isActive={true} />
+              <Tag key={value} screen={screen} label={label} value={value} />
             ))}
           </div>
           <div className="flex mt-[0.8rem]">
             {COUNTRY_LIST_SECOND.map(({ label, value }) => (
-              <Tag key={value} label={label} isActive={false} />
+              <Tag key={value} screen={screen} label={label} value={value} />
             ))}
           </div>
         </div>

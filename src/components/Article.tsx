@@ -1,18 +1,12 @@
 import IconStar from 'assets/star.svg';
 import IconStarFill from 'assets/star_fill.svg';
 import { convertDateFormat } from 'libs';
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Article as ArticleType } from 'types/article.types';
 
 type Props = ArticleType;
 
 export default function Article(props: Props) {
-  const fuck = () => {
-    console.log('fuck');
-
-    redirect(props.web_url);
-  };
-
   return (
     <Link to={props.web_url}>
       <div className="bg-white px-[2rem] py-[1rem] rounded-[0.8rem] mb-[0.8rem] tracking-[-0.05em]">
