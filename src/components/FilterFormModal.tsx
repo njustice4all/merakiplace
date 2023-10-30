@@ -4,6 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { filterState } from 'recoil/searchFilter.recoil';
 import { uiState } from 'recoil/ui.recoil';
 
+import FormHeadline from './FormHeadline';
 import FormTitle from './FormTitle';
 import StyledButton from './StyledButton';
 import Tag from './Tag';
@@ -30,7 +31,7 @@ export default function FilterFormModal({ screen }: Props) {
   const datepickerRef = useRef<HTMLInputElement>(null);
   const setUI = useSetRecoilState(uiState);
   const [{ home, scrap }, setFilter] = useRecoilState(filterState);
-  console.log(home.countries);
+  console.log(home);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -71,12 +72,13 @@ export default function FilterFormModal({ screen }: Props) {
   return (
     <div className="px-[2rem] fixed max-w-[560px] w-full h-full top-0 bg-[#00000050] flex justify-center items-center">
       <div className="bg-white w-full rounded-[1.6rem] p-[2rem]">
-        <FormTitle>헤드라인</FormTitle>
+        <FormHeadline screen={screen} />
+        {/* <FormTitle>헤드라인</FormTitle>
         <input
           type="text"
           placeholder="검색하실 헤드라인을 입력해주세요."
           className="mb-[4rem] w-full h-[4.4rem] border border-[#C4C4C4] rounded-[0.8rem] px-[2rem] py-[1rem] text-[1.4rem] text-[#C4C4C4] placeholder:text-[#C4C4C4]"
-        />
+        /> */}
 
         <FormTitle>날짜</FormTitle>
         <div className="text-[0rem]">
