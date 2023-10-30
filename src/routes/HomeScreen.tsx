@@ -27,15 +27,17 @@ const getArticleQuery = (queryString: string) => ({
 
 export default function HomeScreen() {
   const { ref, inView } = useInView();
-  const queryString = useRecoilValue(getPayloadByScreen('Home'));
+  const queryString = useRecoilValue(getPayloadByScreen('home'));
   const { showFilterFormModal } = useRecoilValue(uiState);
-  // const initialData = useLoaderData() as Awaited<
-  //   ReturnType<ReturnType<typeof getArticleListLoader>>
-  // >;
-  // const { data, fetchNextPage } = useInfiniteQuery({
-  //   ...getArticleQuery(queryString),
-  //   initialData,
-  // });
+
+  const initialData = useLoaderData() as Awaited<
+    ReturnType<ReturnType<typeof getArticleListLoader>>
+  >;
+  const { data, fetchNextPage, refetch } = useInfiniteQuery({
+    ...getArticleQuery(queryString),
+    initialData,
+    enabled: false,
+  });
 
   // useEffect(() => {
   //   if (inView) {
@@ -45,7 +47,7 @@ export default function HomeScreen() {
 
   return (
     <>
-      {showFilterFormModal && <FilterFormModal screen="home" />}
+      {showFilterFormModal && <FilterFormModal screen="home" refetch={refetch} />}
       <FilterHeader />
       <div className="p-5 pb-[8.5rem] bg-[#F0F1F4]">
         {/* {data.pages.map((page, idx) => (

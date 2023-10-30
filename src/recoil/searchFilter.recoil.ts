@@ -31,9 +31,10 @@ export const filterState = atom<State>({
 export const getPayloadByScreen = selectorFamily({
   key: 'getPayloadByScreen',
   get:
-    (screen: 'Home' | 'Scrap') =>
+    (screen: 'home' | 'scrap') =>
     ({ get }) => {
-      const { home } = get(filterState);
-      return createQueryString(home);
+      const filter = get(filterState);
+      const item = filter[screen];
+      return createQueryString(item);
     },
 });
