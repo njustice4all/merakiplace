@@ -9,6 +9,7 @@ import Article from 'components/Article';
 import ArticleContainer from 'components/ArticleContainer';
 import FilterFormModal from 'components/FilterFormModal';
 import FilterHeader from 'components/FilterHeader';
+import Spinner from 'components/Spinner';
 import { getPayloadByScreen } from 'recoil/searchFilter.recoil';
 import { ArticleSearchResponse } from 'types/article.types';
 
@@ -33,7 +34,7 @@ export default function HomeScreen() {
   const initialData = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof getArticleListLoader>>
   >;
-  const { data, fetchNextPage } = useInfiniteQuery({
+  const { data, isFetching, fetchNextPage } = useInfiniteQuery({
     ...getArticleQuery(queryString),
     initialData,
   });
@@ -46,6 +47,7 @@ export default function HomeScreen() {
 
   return (
     <>
+      {isFetching && <Spinner />}
       <FilterFormModal screen="home" />
       <FilterHeader screen="home" />
       <ArticleContainer>
