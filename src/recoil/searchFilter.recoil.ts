@@ -1,7 +1,7 @@
 import { atom, selector, selectorFamily } from 'recoil';
 
 import { createQueryString } from 'libs';
-import { COUNTRY_LIST_FIRST, COUNTRY_LIST_SECOND } from 'libs/constants';
+import { COUNTRY_LIST } from 'libs/constants';
 
 export type Filter = {
   q: string;
@@ -63,7 +63,6 @@ export const getDisplayHeaderTag = selectorFamily({
     ({ get }) => {
       const filter = get(filterState);
       const item = filter[screen];
-      const COUNTRY_LIST = [...COUNTRY_LIST_FIRST, ...COUNTRY_LIST_SECOND];
       const countries = item.countries.split(',').filter((country) => country !== '');
 
       let countryStr = '';
