@@ -6,18 +6,14 @@ import EmptyScrapDescription from 'components/EmptyScrapDescription';
 import FilterFormModal from 'components/FilterFormModal';
 import FilterHeader from 'components/FilterHeader';
 import { filteredScrapListState, scrapState } from 'recoil/scrap.recoil';
-import { uiState } from 'recoil/ui.recoil';
 
 export default function ScrapScreen() {
-  const {
-    scrap: { showFilterFormModal },
-  } = useRecoilValue(uiState);
   const { scrapList } = useRecoilValue(scrapState);
   const filteredScrapList = useRecoilValue(filteredScrapListState);
 
   return (
     <>
-      {showFilterFormModal && <FilterFormModal screen="scrap" />}
+      <FilterFormModal screen="scrap" />
       {scrapList.length > 0 && <FilterHeader screen="scrap" />}
       <ArticleContainer className="h-full">
         {scrapList.length === 0 && <EmptyScrapDescription />}

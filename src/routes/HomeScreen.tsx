@@ -10,7 +10,6 @@ import ArticleContainer from 'components/ArticleContainer';
 import FilterFormModal from 'components/FilterFormModal';
 import FilterHeader from 'components/FilterHeader';
 import { getPayloadByScreen } from 'recoil/searchFilter.recoil';
-import { uiState } from 'recoil/ui.recoil';
 import { ArticleSearchResponse } from 'types/article.types';
 
 export const getArticleListLoader = (queryClient: QueryClient) => () => {
@@ -30,9 +29,6 @@ const getArticleQuery = (queryString: string) => ({
 export default function HomeScreen() {
   const { ref, inView } = useInView();
   const queryString = useRecoilValue(getPayloadByScreen('home'));
-  const {
-    home: { showFilterFormModal },
-  } = useRecoilValue(uiState);
 
   const initialData = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof getArticleListLoader>>
@@ -50,7 +46,7 @@ export default function HomeScreen() {
 
   return (
     <>
-      {showFilterFormModal && <FilterFormModal screen="home" />}
+      <FilterFormModal screen="home" />
       <FilterHeader screen="home" />
       <ArticleContainer>
         {data.pages.map((page, idx) => (
