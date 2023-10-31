@@ -1,4 +1,4 @@
-import { atom, selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 
 import { createQueryString } from 'libs';
 import { COUNTRY_LIST_FIRST, COUNTRY_LIST_SECOND } from 'libs/constants';
@@ -28,6 +28,21 @@ const initialState = {
 export const filterState = atom<State>({
   key: 'filterState',
   default: initialState,
+});
+
+export const displayState = atom<State>({
+  key: 'displayState',
+  default: initialState,
+});
+
+export const updateQuerySelector = selector({
+  key: 'updateQuerySelector',
+  get: ({ get }) => {
+    return get(displayState);
+  },
+  set: ({ set }, newValue) => {
+    set(filterState, newValue);
+  },
 });
 
 export const getPayloadByScreen = selectorFamily({

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { filterState } from 'recoil/searchFilter.recoil';
+import { displayState } from 'recoil/searchFilter.recoil';
 
 type Props = {
   label: string;
@@ -10,11 +10,14 @@ type Props = {
 };
 
 export default function Tag({ screen, label, value }: Props) {
-  const [filter, setFilter] = useRecoilState(filterState);
-  const isActive = useMemo(() => filter[screen].countries.includes(value), [screen, filter, value]);
+  const [display, setDisplay] = useRecoilState(displayState);
+  const isActive = useMemo(
+    () => display[screen].countries.includes(value),
+    [screen, display, value]
+  );
 
   const handleToggle = () => {
-    const { countries } = filter[screen];
+    const { countries } = display[screen];
     const hasCountry = countries.includes(value);
 
     let newCountry = '';
@@ -27,7 +30,7 @@ export default function Tag({ screen, label, value }: Props) {
       newCountry = countries.length === 0 ? value : countries + `,${value}`;
     }
 
-    setFilter((prev) => ({ ...prev, [screen]: { ...prev[screen], countries: newCountry } }));
+    setDisplay((prev) => ({ ...prev, [screen]: { ...prev[screen], countries: newCountry } }));
   };
 
   const mergedClassNames = [

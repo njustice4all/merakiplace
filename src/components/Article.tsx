@@ -21,8 +21,10 @@ export default function Article(props: Props) {
     setScrap((prev) => {
       const isExist = prev.scrapList.some(({ _id }) => _id === props._id);
       if (isExist) {
+        alert('스크랩 제거');
         return { ...prev, scrapList: prev.scrapList.filter(({ _id }) => _id !== props._id) };
       }
+      alert('스크랩 추가');
       return { ...prev, scrapList: [props, ...prev.scrapList] };
     });
   };

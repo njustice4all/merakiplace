@@ -1,23 +1,20 @@
-import { InfiniteData, QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import FormCountries from './FormCountries';
 import FormDate from './FormDate';
 import FormHeadline from './FormHeadline';
 import StyledButton from './StyledButton';
+import { updateQuerySelector } from 'recoil/searchFilter.recoil';
 import { uiState } from 'recoil/ui.recoil';
-import { ArticleSearchResponse } from 'types/article.types';
 
 type Props = {
   screen: 'home' | 'scrap';
-  refetch: (
-    options?: RefetchOptions | undefined
-  ) => Promise<QueryObserverResult<InfiniteData<ArticleSearchResponse, unknown>, Error>>;
 };
 
-export default function FilterFormModal({ screen, refetch }: Props) {
+export default function FilterFormModal({ screen }: Props) {
   const setUI = useSetRecoilState(uiState);
+  const [display, updateQuery] = useRecoilState(updateQuerySelector);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -27,8 +24,8 @@ export default function FilterFormModal({ screen, refetch }: Props) {
   }, []);
 
   const onSubmit = () => {
-    refetch();
-    setUI((prev) => ({ ...prev, showFilterFormModal: false }));
+    updateQuery(display);
+    setUI((prev) => ({ ...prev, [screen]: { showFilterFormModal: false } }));
   };
 
   return (

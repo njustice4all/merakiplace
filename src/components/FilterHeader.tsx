@@ -17,7 +17,7 @@ export default function FilterHeader({ screen }: Props) {
   const displayTag = useRecoilValue(getDisplayHeaderTag(screen));
 
   const onClickFilter = () => {
-    setUI((prev) => ({ ...prev, showFilterFormModal: true }));
+    setUI((prev) => ({ ...prev, [screen]: { showFilterFormModal: true } }));
   };
 
   return (

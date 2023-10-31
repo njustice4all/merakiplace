@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 
 import { getArticleAPI } from 'api/articleSearch.api';
 import Article from 'components/Article';
+import ArticleContainer from 'components/ArticleContainer';
 import FilterFormModal from 'components/FilterFormModal';
 import FilterHeader from 'components/FilterHeader';
 import { getPayloadByScreen } from 'recoil/searchFilter.recoil';
@@ -17,7 +18,7 @@ export const getArticleListLoader = (queryClient: QueryClient) => () => {
 };
 
 const getArticleQuery = (queryString: string) => ({
-  queryKey: ['GET_ARTICLE_LIST'],
+  queryKey: ['GET_ARTICLE_LIST', queryString],
   queryFn: async ({ pageParam = 0 }) => getArticleAPI({ page: pageParam, queryString }),
   initialPageParam: 0,
   getNextPageParam: (lastPage: ArticleSearchResponse) => {
@@ -29,7 +30,9 @@ const getArticleQuery = (queryString: string) => ({
 export default function HomeScreen() {
   const { ref, inView } = useInView();
   const queryString = useRecoilValue(getPayloadByScreen('home'));
-  const { showFilterFormModal } = useRecoilValue(uiState);
+  const {
+    home: { showFilterFormModal },
+  } = useRecoilValue(uiState);
 
   const initialData = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof getArticleListLoader>>
@@ -37,7 +40,6 @@ export default function HomeScreen() {
   const { data, fetchNextPage, refetch } = useInfiniteQuery({
     ...getArticleQuery(queryString),
     initialData,
-    enabled: false,
   });
 
   useEffect(() => {
@@ -48,9 +50,9 @@ export default function HomeScreen() {
 
   return (
     <>
-      {showFilterFormModal && <FilterFormModal screen="home" refetch={refetch} />}
+      {showFilterFormModal && <FilterFormModal screen="home" />}
       <FilterHeader screen="home" />
-      <div className="p-5 pb-[8.5rem] bg-[#F0F1F4]">
+      <ArticleContainer>
         {data.pages.map((page, idx) => (
           <React.Fragment key={idx}>
             {page.response.docs.map((doc) => (
@@ -59,7 +61,7 @@ export default function HomeScreen() {
           </React.Fragment>
         ))}
         <div ref={ref} />
-      </div>
+      </ArticleContainer>
     </>
   );
 }
