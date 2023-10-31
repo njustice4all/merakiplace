@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { atom, selector, selectorFamily } from 'recoil';
 
 import { filterState } from './searchFilter.recoil';
@@ -27,13 +28,61 @@ export const isScrapState = selectorFamily({
     },
 });
 
+const scrapListByHeadlineState = selector({
+  key: 'scrapListByHeadlineState',
+  get: ({ get }) => {
+    const { scrapList } = get(scrapState);
+    const { scrap } = get(filterState);
+    const queryHeadline = scrap.q.toLowerCase();
+
+    if (scrap.q === '') {
+      return scrapList;
+    }
+
+    return scrapList.filter((article) =>
+      article.headline.main.toLowerCase().includes(queryHeadline)
+    );
+  },
+});
+
+const scrapListByCountryState = selector({
+  key: 'scrapListByCountryState',
+  get: ({ get }) => {
+    const scrapListByHeadline = get(scrapListByHeadlineState);
+    const { scrap } = get(filterState);
+
+    const countries = scrap.countries.split(',').filter((country) => country !== '');
+
+    if (countries.length === 0) {
+      return scrapListByHeadline;
+    }
+
+    return scrapListByHeadline.filter(({ keywords }) =>
+      keywords.some(
+        ({ name, value }) => name === 'glocations' && countries.some((country) => value === country)
+      )
+    );
+  },
+});
+
+const scrapListByDateState = selector({
+  key: 'scrapListByDateState',
+  get: ({ get }) => {
+    const scrapListByCountry = get(scrapListByCountryState);
+    const { scrap } = get(filterState);
+
+    if (scrap.date === '') {
+      return scrapListByCountry;
+    }
+
+    const currentDate = dayjs(scrap.date);
+    return scrapListByCountry.filter(({ pub_date }) => dayjs(pub_date).isSame(currentDate, 'day'));
+  },
+});
+
 export const filteredScrapListState = selector({
   key: 'filteredScrapListState',
   get: ({ get }) => {
-    const { scrap } = get(filterState);
-    const { scrapList } = get(scrapState);
-    const queryHeadline = scrap.q;
-
-    return scrapList.filter((article) => article.headline.main.includes(queryHeadline));
+    return get(scrapListByDateState);
   },
 });

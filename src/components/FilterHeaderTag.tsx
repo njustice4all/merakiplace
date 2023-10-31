@@ -8,7 +8,7 @@ export default function FilterHeaderTag({ children, className, isActive }: ItemP
     : 'text-[#6D6D6D] border-[#C4C4C4]';
 
   const mergedClassNames = [
-    'h-full border rounded-[3rem] mr-[0.7rem] flex items-center justify-center text-[1.3rem] last:mr-[0rem]',
+    'cursor-pointer h-full border rounded-[3rem] mr-[0.7rem] flex items-center justify-center text-[1.3rem] last:mr-[0rem]',
     activeClassNames,
     className,
   ].join(' ');

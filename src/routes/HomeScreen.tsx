@@ -37,7 +37,7 @@ export default function HomeScreen() {
   const initialData = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof getArticleListLoader>>
   >;
-  const { data, fetchNextPage, refetch } = useInfiniteQuery({
+  const { data, fetchNextPage } = useInfiniteQuery({
     ...getArticleQuery(queryString),
     initialData,
   });
